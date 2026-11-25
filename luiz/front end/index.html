@@ -1,534 +1,2485 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
 
-    <title>TechCell</title>
+    <title>TechCell Gamer</title>
 
     <style>
 
         * {
+
+        /* =========================
+   EFEITO DE NEVE
+========================= */
+
+#snow {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    z-index: 9999;
+}
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: #f4f4f4;
-            color: #222;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #0b0f16;
+            color: white;
         }
 
-        /* MENU */
+        /* =========================
+           HEADER
+        ========================= */
 
         header {
-            background-color: #111;
-            color: white;
-            padding: 20px;
+            background: linear-gradient(135deg, #050505, #3a4e79, #062d52);
+            padding: 20px 6%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 140, 255, 0.25);
         }
 
-        nav {
-            max-width: 1100px;
+        .header-container {
+            max-width: 1400px;
             margin: auto;
+
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 30px;
         }
 
         .logo {
-            font-size: 28px;
+            font-size: 2rem;
             font-weight: bold;
+            color: #00aaff;
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         nav a {
             color: white;
             text-decoration: none;
-            margin-left: 20px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: 0.3s;
         }
 
-        nav a:hover {
-            color: #00aaff;
+        nav a:hover,
+        nav a.active {
+            background: #008cff;
         }
 
-        /* BANNER */
+        /* =========================
+           BANNER
+        ========================= */
 
         .banner {
-            background: linear-gradient(135deg, #111, #0066aa);
-            color: white;
+            min-height: 330px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 80px 20px;
+
+            padding: 50px 20px;
+
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.55),
+                    rgba(0, 0, 0, 0.75)
+                ),
+                radial-gradient(
+                    circle at center,
+                    #064c83,
+                    #05070b 70%
+                );
         }
 
-        .banner h1 {
-            font-size: 45px;
-            margin-bottom: 15px;
-        }
-
-        .banner p {
-            font-size: 20px;
-        }
-
-        /* PRODUTOS */
-
-        .produtos {
-            max-width: 1100px;
-            margin: 50px auto;
-            padding: 20px;
-        }
-
-        .produtos h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 32px;
-        }
-
-        .lista-produtos {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .produto {
-            background-color: white;
-            padding: 25px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 3px 10px #ccc;
-        }
-
-        .produto .icone {
-            font-size: 50px;
-            margin-bottom: 15px;
-        }
-
-        .produto h3 {
+        .banner-content h1 {
+            font-size: 3.5rem;
+            color: #00aaff;
             margin-bottom: 10px;
         }
 
-        .preco {
-            font-size: 22px;
-            font-weight: bold;
-            color: #0066aa;
-            margin: 15px;
-        }
-
-        button {
-            background-color: #0066aa;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #004d80;
-        }
-
-        /* CARRINHO */
-
-        .carrinho {
-            background-color: #111;
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
-
-        .carrinho h2 {
+        .banner-content h2 {
+            font-size: 1.7rem;
             margin-bottom: 15px;
         }
 
-        #total {
-            font-size: 25px;
-            margin: 15px;
+        .banner-content p {
+            color: #d6e9f7;
+            font-size: 1.1rem;
         }
 
-        /* RODAPÉ */
+        /* =========================
+           PESQUISA
+        ========================= */
 
-        footer {
-            background-color: #000;
+        .filtros {
+            max-width: 1300px;
+            margin: 30px auto;
+
+            padding: 0 20px;
+
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filtros input,
+        .filtros select {
+            background: #151c27;
             color: white;
-            text-align: center;
-            padding: 25px;
+
+            border: 1px solid #26384d;
+
+            padding: 14px 18px;
+
+            border-radius: 10px;
+
+            font-size: 1rem;
+
+            outline: none;
         }
 
-        /* CELULAR */
+        .filtros input {
+            width: min(500px, 100%);
+        }
 
-        @media (max-width: 700px) {
+        .filtros input:focus,
+        .filtros select:focus {
+            border-color: #00aaff;
+            box-shadow: 0 0 10px rgba(0, 170, 255, 0.25);
+        }
 
-            .lista-produtos {
-                grid-template-columns: 1fr;
-            }
+        /* =========================
+           PRODUTOS
+        ========================= */
 
-            nav {
-                flex-direction: column;
-                gap: 15px;
-            }
+        .produtos-section {
+            max-width: 1400px;
+            margin: auto;
+            padding: 20px;
+        }
 
-            .banner h1 {
-                font-size: 35px;
-            }
+        .titulo-secao {
+            text-align: center;
+            margin: 20px 0 35px;
+        }
+
+        .titulo-secao h2 {
+            font-size: 2rem;
+            color: #00aaff;
+        }
+
+        .titulo-secao p {
+            color: #9ca3af;
+            margin-top: 8px;
+        }
+
+        .produtos {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(240px, 1fr));
+
+            gap: 25px;
+        }
+
+        .produto {
+            background: #111823;
+
+            border: 1px solid #1d3044;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            transition:
+                transform 0.3s,
+                box-shadow 0.3s,
+                border-color 0.3s;
+
+            position: relative;
+        }
+
+        .produto:hover {
+            transform: translateY(-7px);
+
+            border-color: #008cff;
+
+            box-shadow:
+                0 10px 30px rgba(0, 140, 255, 0.18);
+        }
+
+        .imagem-container {
+            height: 220px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #080c12;
+
+            padding: 15px;
         }
 
         .produto img {
-    width: 180px;
-    height: 180px;
-    object-fit: contain;
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            transition: transform 0.3s;
+        }
+
+        .produto:hover img {
+            transform: scale(1.06);
+        }
+
+        .produto-info {
+            padding: 20px;
+        }
+
+        .categoria {
+            display: inline-block;
+
+            font-size: 0.75rem;
+
+            color: #6dd3ff;
+
+            background: rgba(0, 140, 255, 0.12);
+
+            border: 1px solid rgba(0, 140, 255, 0.2);
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            margin-bottom: 10px;
+        }
+
+        .produto h3 {
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+
+        .descricao {
+            color: #9ca3af;
+
+            font-size: 0.9rem;
+
+            min-height: 42px;
+
+            line-height: 1.4;
+
+            margin-bottom: 15px;
+        }
+
+        .preco {
+            font-size: 1.5rem;
+
+            color: #00b7ff;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+        }
+
+        .btn-comprar {
+            width: 100%;
+
+            border: none;
+
+            background: linear-gradient(
+                135deg,
+                #008cff,
+                #0064bd
+            );
+
+            color: white;
+
+            padding: 12px;
+
+            border-radius: 9px;
+
+            font-size: 1rem;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .btn-comprar:hover {
+            background: linear-gradient(
+                135deg,
+                #00aaff,
+                #0072d1
+            );
+
+            transform: scale(1.02);
+        }
+
+        /* =========================
+           CARRINHO
+        ========================= */
+
+        #carrinho {
+            max-width: 1000px;
+
+            margin: 70px auto;
+
+            padding: 30px;
+
+            background: #111823;
+
+            border: 1px solid #1d3044;
+
+            border-radius: 15px;
+        }
+
+        #carrinho h2 {
+            color: #00aaff;
+
+            margin-bottom: 25px;
+
+            text-align: center;
+        }
+
+        .carrinho-vazio {
+            text-align: center;
+
+            color: #8b949e;
+
+            padding: 30px;
+        }
+
+        .item-carrinho {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding: 15px 0;
+
+            border-bottom: 1px solid #263241;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-info strong {
+            display: block;
+
+            margin-bottom: 5px;
+        }
+
+        .item-info span {
+            color: #00aaff;
+        }
+
+        .quantidade {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+        .quantidade button {
+            width: 30px;
+            height: 30px;
+
+            border: none;
+
+            background: #243244;
+
+            color: white;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .quantidade button:hover {
+            background: #008cff;
+        }
+
+        .remover {
+            background: #9b2020 !important;
+        }
+
+        .remover:hover {
+            background: #d52b2b !important;
+        }
+
+        .total {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-top: 25px;
+
+            font-size: 1.4rem;
+
+            font-weight: bold;
+        }
+
+        .total span {
+            color: #00b7ff;
+        }
+
+        .btn-finalizar {
+            width: 100%;
+
+            margin-top: 20px;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #16a34a;
+
+            color: white;
+
+            font-size: 1.1rem;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .btn-finalizar:hover {
+            background: #22c55e;
+        }
+
+        /* =========================
+           RODAPÉ
+        ========================= */
+
+        footer {
+            background: #05070b;
+
+            border-top: 1px solid #182535;
+
+            text-align: center;
+
+            padding: 30px;
+
+            margin-top: 60px;
+
+            color: #8b949e;
+        }
+
+        footer strong {
+            color: #00aaff;
+        }
+
+        /* =========================
+           SEM RESULTADOS
+        ========================= */
+
+        .sem-resultados {
+            grid-column: 1 / -1;
+
+            text-align: center;
+
+            padding: 50px;
+
+            color: #9ca3af;
+
+            font-size: 1.1rem;
+        }
+
+        /* =========================
+           RESPONSIVO
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .header-container {
+                flex-direction: column;
+            }
+
+            nav {
+                justify-content: center;
+            }
+
+            .banner-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .banner-content h2 {
+                font-size: 1.3rem;
+            }
+
+            .item-carrinho {
+                flex-wrap: wrap;
+            }
+
+            .total {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+              
+
+
+        }
+
+        /* =========================
+   EFEITO DE NEVE
+========================= */
+
+#snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 9999;
+}
+
+.floco {
+    position: absolute;
+    top: -30px;
+
+    color: white;
+
+    text-shadow:
+        0 0 5px #fff,
+        0 0 10px #00aaff;
+
+    animation-name: cairNeve;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes cairNeve {
+
+    0% {
+        transform:
+            translateY(-30px)
+            translateX(0)
+            rotate(0deg);
+    }
+
+    25% {
+        transform:
+            translateY(25vh)
+            translateX(30px)
+            rotate(90deg);
+    }
+
+    50% {
+        transform:
+            translateY(50vh)
+            translateX(-30px)
+            rotate(180deg);
+    }
+
+    75% {
+        transform:
+            translateY(75vh)
+            translateX(30px)
+            rotate(270deg);
+    }
+
+    100% {
+        transform:
+            translateY(110vh)
+            translateX(-20px)
+            rotate(360deg);
+    }
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background-image: url("img/fundo-techcell.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* Fundo permanece fixo durante a rolagem */
+    background-attachment: fixed;
+
+    color: white;
+}
+
+/* =========================
+   NOTIFICAÇÃO DE COMPRA
+========================= */
+
+#compra-notificacao {
+    position: fixed;
+
+    bottom: 25px;
+    left: 25px;
+
+    width: 320px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 15px;
+
+    background: rgba(5, 8, 15, 0.95);
+
+    border: 1px solid #008cff;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 0 15px rgba(0, 140, 255, 0.5);
+
+    color: white;
+
+    z-index: 10000;
+
+    transform: translateX(-400px);
+
+    opacity: 0;
+
+    transition: 0.5s ease;
+}
+
+/* Quando aparece */
+
+#compra-notificacao.mostrar {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+
+/* Ícone */
+
+.compra-icone {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #006eff;
+
+    border-radius: 50%;
+
+    font-size: 22px;
+
+    box-shadow: 0 0 12px #006eff;
+}
+
+
+/* Informações */
+
+.compra-info {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+}
+
+.compra-info strong {
+    color: #00aaff;
+
+    font-size: 16px;
+}
+
+.compra-info span {
+    font-size: 14px;
+
+    margin-top: 3px;
+
+    color: #ddd;
+}
+
+.compra-info small {
+    color: #777;
+
+    margin-top: 5px;
+
+    font-size: 11px;
+}
+
+
+/* Botão fechar */
+
+#compra-notificacao button {
+    background: transparent;
+
+    border: none;
+
+    color: #aaa;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+#compra-notificacao button:hover {
+    color: white;
+}
+
+
+/* Celular */
+
+@media (max-width: 600px) {
+
+    #compra-notificacao {
+        left: 10px;
+        bottom: 10px;
+
+        width: calc(100% - 50px);
+    }
+
 }
 
     </style>
 </head>
 
+
+<!-- Efeito de neve -->
+<div id="snow-container"></div>
+
+<script>
+const snowContainer = document.getElementById("snow-container");
+
+const quantidadeNeve = 80;
+
+for (let i = 0; i < quantidadeNeve; i++) {
+    const floco = document.createElement("span");
+
+    floco.classList.add("floco");
+
+    floco.innerHTML = "❄";
+
+    floco.style.left = Math.random() * 100 + "vw";
+
+    floco.style.fontSize = (Math.random() * 12 + 8) + "px";
+
+    floco.style.animationDuration = (Math.random() * 8 + 5) + "s";
+
+    floco.style.animationDelay = Math.random() * 10 + "s";
+
+    floco.style.opacity = Math.random() * 0.7 + 0.3;
+
+    snowContainer.appendChild(floco);
+}
+
+
+</script>
+
+
+
 <body>
 
-    <!-- MENU -->
+
+
+     <!-- Notificação de compra -->
+<div id="compra-notificacao">
+    <div class="compra-icone">🛒</div>
+
+    <div class="compra-info">
+        <strong id="compra-nome">Lucas</strong>
+        <span id="compra-mensagem">
+            acabou de comprar um produto!
+        </span>
+        <small id="compra-tempo">Agora mesmo</small>
+    </div>
+
+    <button onclick="fecharCompra()">×</button>
+</div>
+
+<script>
+const compras = [
+    {
+        nome: "Lucas",
+        produto: "Headset Gamer",
+        tempo: "Agora mesmo"
+    },
+    {
+        nome: "Gabriel",
+        produto: "Teclado Mecânico RGB",
+        tempo: "Agora mesmo"
+    },
+    {
+        nome: "Edigar",
+        produto: "Mouse Gamer",
+        tempo: "Agora mesmo"
+    },
+    {
+        nome: "sabrina",
+        produto: "Controle Gamer",
+        tempo: "Agora mesmo"
+    },
+    {
+        nome: "Pedro",
+        produto: "Monitor Gamer",
+        tempo: "Agora mesmo"
+    },
+    {
+        nome: "Rafael",
+        produto: "Mousepad RGB",
+        tempo: "Agora mesmo"
+    },
+    {
+        nome: "Bruna",
+        produto: "Fone Bluetooth",
+        tempo: "Agora mesmo"
+    },
+    {
+        nome: "Henrique",
+        produto: "Teclado Gamer",
+        tempo: "Agora mesmo"
+    }
+];
+
+let compraAtual = 0;
+
+const notificacao = document.getElementById("compra-notificacao");
+
+function mostrarCompra() {
+
+    const compra = compras[compraAtual];
+
+    document.getElementById("compra-nome").textContent =
+        compra.nome;
+
+    document.getElementById("compra-mensagem").textContent =
+        " acabou de comprar " + compra.produto + "!";
+
+    document.getElementById("compra-tempo").textContent =
+        compra.tempo;
+
+    notificacao.classList.add("mostrar");
+
+    // Esconde depois de 8 segundos
+    setTimeout(() => {
+        notificacao.classList.remove("mostrar");
+    }, 8000);
+
+    compraAtual++;
+
+    if (compraAtual >= compras.length) {
+        compraAtual = 0;
+    }
+}
+
+function fecharCompra() {
+    notificacao.classList.remove("mostrar");
+}
+
+// Primeira notificação
+setTimeout(() => {
+    mostrarCompra();
+}, 3000);
+
+// Nova notificação a cada 6 minutos
+setInterval(() => {
+    mostrarCompra();
+}, 30000);
+</script>
+
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
 
     <header>
 
-        <nav>
+        <div class="header-container">
 
             <div class="logo">
-                TechCell
+                Tech<span>Cell</span> 👑
             </div>
 
-            <div>
-                <a href="#inicio">Início</a>
-                <a href="#produtos">Produtos</a>
-                <a href="#carrinho">Carrinho</a>
-            </div>
+            <nav>
+                <a href="gamer.html" class="active">
+                    🎮 Gamer
+                </a>
 
-        </nav>
+                <a href="#carrinho">
+                    🛒 Carrinho
+                    (<span id="contador">0</span>)
+                </a>
+
+            </nav>
+
+        </div>
 
     </header>
 
 
-    <!-- BANNER -->
+    <!-- =========================
+         BANNER
+    ========================= -->
 
-    <section class="banner" id="inicio">
+    <section class="banner">
 
-        <h1>TechCell</h1>
+        <div class="banner-content">
 
-        <p>
-            Tecnologia que acompanha você.
-        </p>
+            <h1>TECHCELL GAMER</h1>
 
-        <p>
-            Os melhores acessórios para seu dia a dia.
-        </p>
+            <h2>
+                Seu setup começa aqui.
+            </h2>
 
-    </section>
-
-
-    <!-- PRODUTOS -->
-
-    <section class="produtos" id="produtos">
-
-        <h2>Nossos Produtos</h2>
-
-        <div class="lista-produtos">
-
-
-            <div class="produto">
-
-                <div class="produto">
-                    <img src="imagens/fone.jpg" alt="Fone Bluetooth">
-                
-                    <h3>Fone Bluetooth</h3>
-                
-                    <p>Fone sem fio de alta qualidade.</p>
-                
-                    <strong>R$ 89,90</strong>
-                
-                    <button>Comprar</button>
-                </div>
-
-            </div>
-
-
-            <div class="produto">
-
-                <div class="icone">🔌</div>
-
-                <h3>Carregador Turbo</h3>
-
-                <p>Carregamento rápido de 25W.</p>
-
-                <div class="preco">
-                    R$ 59,90
-                </div>
-
-                <button onclick="adicionar('Carregador Turbo', 59.90)">
-                    Comprar
-                </button>
-
-            </div>
-
-
-            <div class="produto">
-
-                <div class="icone">🔗</div>
-
-                <h3>Cabo USB-C</h3>
-
-                <p>Cabo resistente e rápido.</p>
-
-                <div class="preco">
-                    R$ 29,90
-                </div>
-
-                <button onclick="adicionar('Cabo USB-C', 29.90)">
-                    Comprar
-                </button>
-
-            </div>
-
-
-            <div class="produto">
-
-                <div class="icone">📱</div>
-
-                <h3>Suporte para Celular</h3>
-
-                <p>Prático para mesa.</p>
-
-                <div class="preco">
-                    R$ 39,90
-                </div>
-
-                <button onclick="adicionar('Suporte para Celular', 39.90)">
-                    Comprar
-                </button>
-
-            </div>
-
-
-            <div class="produto">
-
-                <div class="icone">🖱️</div>
-
-                <h3>Mouse Gamer</h3>
-
-                <p>Mouse com iluminação RGB.</p>
-
-                <div class="preco">
-                    R$ 119,90
-                </div>
-
-                <button onclick="adicionar('Mouse Gamer', 119.90)">
-                    Comprar
-                </button>
-
-            </div>
-
-
-            <div class="produto">
-
-                <div class="icone">⌨️</div>
-
-                <h3>Teclado RGB</h3>
-
-                <p>Teclado mecânico gamer.</p>
-
-                <div class="preco">
-                    R$ 199,90
-                </div>
-
-                <button onclick="adicionar('Teclado RGB', 199.90)">
-                    Comprar
-                </button>
-
-            </div>
-
-
-            <div class="produto">
-
-                <div class="icone">🎮</div>
-
-                <h3>Headset Gamer</h3>
-
-                <p>Headset com microfone.</p>
-
-                <div class="preco">
-                    R$ 149,90
-                </div>
-
-                <button onclick="adicionar('Headset Gamer', 149.90)">
-                    Comprar
-                </button>
-
-            </div>
-
-
-            <div class="produto">
-
-                <div class="icone">🔋</div>
-
-                <h3>Power Bank</h3>
-
-                <p>Bateria portátil de 20.000 mAh.</p>
-
-                <div class="preco">
-                    R$ 129,90
-                </div>
-
-                <button onclick="adicionar('Power Bank', 129.90)">
-                    Comprar
-                </button>
-
-            </div>
-
-
-            <div class="produto">
-
-                <div class="icone">📷</div>
-
-                <h3>Webcam Full HD</h3>
-
-                <p>Webcam para aulas e reuniões.</p>
-
-                <div class="preco">
-                    R$ 159,90
-                </div>
-
-                <button onclick="adicionar('Webcam Full HD', 159.90)">
-                    Comprar
-                </button>
-
-            </div>
-
-
-            <div class="produto">
-
-                <div class="icone">🔌</div>
-
-                <h3>Hub USB</h3>
-
-                <p>Hub com quatro portas USB.</p>
-
-                <div class="preco">
-                    R$ 79,90
-                </div>
-
-                <button onclick="adicionar('Hub USB', 79.90)">
-                    Comprar
-                </button>
-
-            </div>
+            <p>
+                Periféricos, acessórios e equipamentos
+                para elevar sua experiência gamer.
+            </p>
 
         </div>
 
     </section>
 
 
-    <!-- CARRINHO -->
+    <!-- =========================
+         PESQUISA E FILTROS
+    ========================= -->
 
-    <section class="carrinho" id="carrinho">
+    <section class="filtros">
 
-        <h2>🛒 Meu Carrinho</h2>
+        <input
+            type="text"
+            id="pesquisa"
+            placeholder="🔎 Pesquisar produto..."
+        >
 
-        <p id="listaCarrinho">
-            Nenhum produto adicionado.
-        </p>
+        <select id="categoria">
 
-        <div id="total">
-            Total: R$ 0,00
+            <option value="todos">
+                Todas as categorias
+            </option>
+
+            <option value="monitores">
+                Monitores
+            </option>
+
+            <option value="mouse">
+                Mouses
+            </option>
+
+            <option value="teclados">
+                Teclados
+            </option>
+
+            <option value="headsets">
+                Headsets
+            </option>
+
+            <option value="acessorios">
+                Acessórios
+            </option>
+
+            <option value="controles">
+                Controles
+            </option>
+
+            <option value="streaming">
+                Streaming
+            </option>
+
+            <option value="setup">
+                Setup
+            </option>
+
+        </select>
+
+    </section>
+
+
+    <!-- =========================
+         PRODUTOS
+    ========================= -->
+
+    <main class="produtos-section">
+
+        <div class="titulo-secao">
+
+            <h2>🔥 Produtos Gamer</h2>
+
+            <p>
+                Encontre tudo para montar seu setup.
+            </p>
+
         </div>
 
-        <button onclick="finalizarCompra()">
-            Finalizar compra
+
+        <div class="produtos" id="listaProdutos">
+
+
+            <!-- 1 -->
+
+            <article
+                class="produto"
+                data-categoria="monitores"
+                data-nome="Monitor Gamer 24 180Hz"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/monitor 2.jpeg"
+                        alt="Monitor Gamer 24 polegadas"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Monitores
+                    </span>
+
+                    <h3>
+                        Monitor Gamer 24" 180Hz
+                    </h3>
+
+                    <p class="descricao">
+                        Tela Full HD de 24 polegadas
+                        com alta taxa de atualização.
+                    </p>
+
+                    <div class="preco">
+                        R$ 899,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Monitor Gamer 24 180Hz',
+                            899.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 2 -->
+
+            <article
+                class="produto"
+                data-categoria="monitores"
+                data-nome="Monitor Gamer 27 165Hz"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/monitor 1.jpeg"
+                        alt="Monitor Gamer 27 polegadas"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Monitores
+                    </span>
+
+                    <h3>
+                        Monitor Gamer 27" 165Hz
+                    </h3>
+
+                    <p class="descricao">
+                        Monitor amplo para jogos,
+                        estudos e entretenimento.
+                    </p>
+
+                    <div class="preco">
+                        R$ 1.299,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Monitor Gamer 27 165Hz',
+                            1299.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 3 -->
+
+            <article
+                class="produto"
+                data-categoria="mouse"
+                data-nome="Mouse Gamer Wireless RGB"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/mouse gamer.jpeg"
+                        alt="Mouse Gamer Wireless"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Mouses
+                    </span>
+
+                    <h3>
+                        Mouse Gamer Wireless RGB
+                    </h3>
+
+                    <p class="descricao">
+                        Mouse sem fio com iluminação RGB
+                        e sensor de alta precisão.
+                    </p>
+
+                    <div class="preco">
+                        R$ 189,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Mouse Gamer Wireless RGB',
+                            189.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 4 -->
+
+            <article
+                class="produto"
+                data-categoria="teclados"
+                data-nome="Teclado Gamer Wireless RGB"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/teclado gamer.jpeg"
+                        alt="Teclado Gamer Wireless"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Teclados
+                    </span>
+
+                    <h3>
+                        Teclado Gamer Wireless RGB
+                    </h3>
+
+                    <p class="descricao">
+                        Teclado mecânico compacto com
+                        iluminação RGB.
+                    </p>
+
+                    <div class="preco">
+                        R$ 249,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Teclado Gamer Wireless RGB',
+                            249.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 5 -->
+
+            <article
+                class="produto"
+                data-categoria="headsets"
+                data-nome="Headset Gamer Wireless"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/fone gamer.jpeg"
+                        alt="Headset Gamer Wireless"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Headsets
+                    </span>
+
+                    <h3>
+                        Headset Gamer Wireless
+                    </h3>
+
+                    <p class="descricao">
+                        Som imersivo, microfone integrado
+                        e conexão sem fio.
+                    </p>
+
+                    <div class="preco">
+                        R$ 329,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Headset Gamer Wireless',
+                            329.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 6 -->
+
+            <article
+                class="produto"
+                data-categoria="acessorios"
+                data-nome="Mousepad Gamer RGB"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/mouse pad.jpeg"
+                        alt="Mousepad Gamer RGB"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Acessórios
+                    </span>
+
+                    <h3>
+                        Mousepad Gamer RGB
+                    </h3>
+
+                    <p class="descricao">
+                        Mousepad grande com bordas iluminadas
+                        por RGB.
+                    </p>
+
+                    <div class="preco">
+                        R$ 119,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Mousepad Gamer RGB',
+                            119.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 7 -->
+
+            <article
+                class="produto"
+                data-categoria="streaming"
+                data-nome="Microfone USB Gamer"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/microfone.jpeg"
+                        alt="Microfone USB Gamer"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Streaming
+                    </span>
+
+                    <h3>
+                        Microfone USB Gamer
+                    </h3>
+
+                    <p class="descricao">
+                        Microfone USB para lives,
+                        chamadas e gravações.
+                    </p>
+
+                    <div class="preco">
+                        R$ 219,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Microfone USB Gamer',
+                            219.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 8 -->
+
+            <article
+                class="produto"
+                data-categoria="streaming"
+                data-nome="Webcam Full HD Gamer"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/web can.jpeg"
+                        alt="Webcam Full HD"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Streaming
+                    </span>
+
+                    <h3>
+                        Webcam Full HD Gamer
+                    </h3>
+
+                    <p class="descricao">
+                        Webcam Full HD para streaming,
+                        reuniões e criação de conteúdo.
+                    </p>
+
+                    <div class="preco">
+                        R$ 199,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Webcam Full HD Gamer',
+                            199.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 9 -->
+
+            <article
+                class="produto"
+                data-categoria="controles"
+                data-nome="Controle Gamer PC"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/controle gamer 2.jpeg"
+                        alt="Controle Gamer"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Controles
+                    </span>
+
+                    <h3>
+                        Controle Gamer PC
+                    </h3>
+
+                    <p class="descricao">
+                        Controle com conexão USB para
+                        jogos no computador.
+                    </p>
+
+                    <div class="preco">
+                        R$ 159,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Controle Gamer PC',
+                            159.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 10 -->
+
+            <article
+                class="produto"
+                data-categoria="controles"
+                data-nome="Volante Gamer"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/volante gamer.jpeg"
+                        alt="Volante Gamer"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Controles
+                    </span>
+
+                    <h3>
+                        Volante Gamer
+                    </h3>
+
+                    <p class="descricao">
+                        Volante para jogos de corrida
+                        com pedais.
+                    </p>
+
+                    <div class="preco">
+                        R$ 799,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Volante Gamer',
+                            799.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 11 -->
+
+            <article
+                class="produto"
+                data-categoria="setup"
+                data-nome="Cadeira Gamer"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/cadeira gamer.jpeg"
+                        alt="Cadeira Gamer"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Setup
+                    </span>
+
+                    <h3>
+                        Cadeira Gamer
+                    </h3>
+
+                    <p class="descricao">
+                        Cadeira gamer com encosto alto
+                        e apoio para braços.
+                    </p>
+
+                    <div class="preco">
+                        R$ 899,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Cadeira Gamer',
+                            899.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 12 -->
+
+            <article
+                class="produto"
+                data-categoria="setup"
+                data-nome="Suporte para Headset"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/base de fone.jpeg"
+                        alt="Suporte para Headset"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Setup
+                    </span>
+
+                    <h3>
+                        Suporte para Headset
+                    </h3>
+
+                    <p class="descricao">
+                        Organize seu headset e deixe
+                        sua mesa mais limpa.
+                    </p>
+
+                    <div class="preco">
+                        R$ 69,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Suporte para Headset',
+                            69.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 13 -->
+
+            <article
+                class="produto"
+                data-categoria="setup"
+                data-nome="Suporte para Monitor"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/base de monitor.jpeg"
+                        alt="Suporte para Monitor"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Setup
+                    </span>
+
+                    <h3>
+                        Suporte para Monitor
+                    </h3>
+
+                    <p class="descricao">
+                        Suporte ajustável para organização
+                        do setup.
+                    </p>
+
+                    <div class="preco">
+                        R$ 159,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Suporte para Monitor',
+                            159.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 14 -->
+
+            <article
+                class="produto"
+                data-categoria="setup"
+                data-nome="Kit Fans RGB"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/rgb gamer.jpeg"
+                        alt="Kit Fans RGB"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Setup
+                    </span>
+
+                    <h3>
+                        Kit Fans RGB
+                    </h3>
+
+                    <p class="descricao">
+                        Kit de ventoinhas RGB para melhorar
+                        o visual e fluxo de ar.
+                    </p>
+
+                    <div class="preco">
+                        R$ 149,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Kit Fans RGB',
+                            149.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 15 -->
+
+            <article
+                class="produto"
+                data-categoria="setup"
+                data-nome="Fita LED RGB"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/fita led rgb.jpeg"
+                        alt="Fita LED RGB"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Setup
+                    </span>
+
+                    <h3>
+                        Fita LED RGB
+                    </h3>
+
+                    <p class="descricao">
+                        Iluminação RGB para personalizar
+                        seu ambiente gamer.
+                    </p>
+
+                    <div class="preco">
+                        R$ 59,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Fita LED RGB',
+                            59.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 16 -->
+
+            <article
+                class="produto"
+                data-categoria="acessorios"
+                data-nome="Hub USB Gamer"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/strim dek.jpeg"
+                        alt="Hub USB Gamer"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Acessórios
+                    </span>
+
+                    <h3>
+                        Hub USB Gamer
+                    </h3>
+
+                    <p class="descricao">
+                        Expanda as conexões USB do
+                        seu computador.
+                    </p>
+
+                    <div class="preco">
+                        R$ 79,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Hub USB Gamer',
+                            79.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 17 -->
+
+            <article
+                class="produto"
+                data-categoria="streaming"
+                data-nome="Placa de Captura HDMI"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/hdmi.jpeg"
+                        alt="Placa de Captura HDMI"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Streaming
+                    </span>
+
+                    <h3>
+                        Placa de Captura HDMI
+                    </h3>
+
+                    <p class="descricao">
+                        Capture vídeo para transmissões
+                        e gravações.
+                    </p>
+
+                    <div class="preco">
+                        R$ 249,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Placa de Captura HDMI',
+                            249.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 18 -->
+
+            <article
+                class="produto"
+                data-categoria="acessorios"
+                data-nome="Oculos VR Gamer"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/vr gamer.jpeg"
+                        alt="Óculos VR Gamer"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Acessórios
+                    </span>
+
+                    <h3>
+                        Óculos VR Gamer
+                    </h3>
+
+                    <p class="descricao">
+                        Experiência de realidade virtual
+                        para jogos compatíveis.
+                    </p>
+
+                    <div class="preco">
+                        R$ 599,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Oculos VR Gamer',
+                            599.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 19 -->
+
+            <article
+                class="produto"
+                data-categoria="controles"
+                data-nome="Gamepad Gamer RGB"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/controle gamer.jpeg"
+                        alt="Gamepad Gamer RGB"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Controles
+                    </span>
+
+                    <h3>
+                        Gamepad Gamer RGB
+                    </h3>
+
+                    <p class="descricao">
+                        Controle compacto com iluminação
+                        e conexão USB.
+                    </p>
+
+                    <div class="preco">
+                        R$ 129,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Gamepad Gamer RGB',
+                            129.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- 20 -->
+
+            <article
+                class="produto"
+                data-categoria="acessorios"
+                data-nome="Caixa de Som Gamer RGB"
+            >
+
+                <div class="imagem-container">
+
+                    <img
+                        src="img/caixa de som.jpeg"
+                        alt="Caixa de Som Gamer RGB"
+                    >
+
+                </div>
+
+                <div class="produto-info">
+
+                    <span class="categoria">
+                        Acessórios
+                    </span>
+
+                    <h3>
+                        Caixa de Som Gamer RGB
+                    </h3>
+
+                    <p class="descricao">
+                        Sistema compacto de áudio com
+                        iluminação RGB.
+                    </p>
+
+                    <div class="preco">
+                        R$ 179,90
+                    </div>
+
+                    <button
+                        class="btn-comprar"
+                        onclick="adicionarCarrinho(
+                            'Caixa de Som Gamer RGB',
+                            179.90
+                        )"
+                    >
+                        🛒 Adicionar
+                    </button>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         CARRINHO
+    ========================= -->
+
+    <section id="carrinho">
+
+        <h2>🛒 Seu Carrinho</h2>
+
+        <div id="listaCarrinho">
+
+            <div class="carrinho-vazio">
+                Seu carrinho está vazio.
+            </div>
+
+        </div>
+
+        <div class="total">
+
+            <strong>
+                Total:
+            </strong>
+
+            <span id="total">
+                R$ 0,00
+            </span>
+
+        </div>
+
+        <button
+            class="btn-finalizar"
+            onclick="finalizarCompra()"
+        >
+            💳 Finalizar compra
         </button>
 
     </section>
 
 
-    <!-- RODAPÉ -->
+    <!-- =========================
+         FOOTER
+    ========================= -->
 
     <footer>
 
         <p>
-            © 2026 TechCell - Tecnologia que acompanha você.
+            © 2026
+            <strong>TechCell</strong>.
+            Todos os direitos reservados.
+        </p>
+
+        <p style="margin-top: 8px;">
+            Tecnologia para todos os gamers. 🎮
         </p>
 
     </footer>
 
 
-    <!-- JAVASCRIPT -->
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
 
     <script>
 
-        let carrinho = [];
+        /*
+        ========================================
+        CARRINHO COMPARTILHADO
+        ========================================
 
-        function adicionar(nome, preco) {
+        O localStorage permite que o carrinho
+        continue salvo quando o usuário muda
+        entre index.html e gamer.html.
+        */
 
-            carrinho.push({
-                nome: nome,
-                preco: preco
-            });
+        let carrinho =
+            JSON.parse(
+                localStorage.getItem("techcellCarrinho")
+            ) || [];
 
-            atualizarCarrinho();
 
-            alert(nome + " foi adicionado ao carrinho!");
+        /*
+        ========================================
+        FORMATAÇÃO DE PREÇO
+        ========================================
+        */
+
+        function formatarPreco(valor) {
+
+            return valor.toLocaleString(
+                "pt-BR",
+                {
+                    style: "currency",
+                    currency: "BRL"
+                }
+            );
 
         }
 
 
-        function atualizarCarrinho() {
+        /*
+        ========================================
+        SALVAR CARRINHO
+        ========================================
+        */
 
-            let lista = document.getElementById("listaCarrinho");
+        function salvarCarrinho() {
 
-            let total = 0;
+            localStorage.setItem(
+                "techcellCarrinho",
+                JSON.stringify(carrinho)
+            );
 
-            if (carrinho.length === 0) {
+        }
 
-                lista.innerHTML = "Nenhum produto adicionado.";
+
+        /*
+        ========================================
+        ADICIONAR PRODUTO
+        ========================================
+        */
+
+        function adicionarCarrinho(nome, preco) {
+
+            const produtoExistente =
+                carrinho.find(
+                    item => item.nome === nome
+                );
+
+
+            if (produtoExistente) {
+
+                produtoExistente.quantidade++;
 
             } else {
 
-                lista.innerHTML = "";
+                carrinho.push({
 
-                carrinho.forEach(function(produto) {
+                    nome: nome,
 
-                    lista.innerHTML +=
-                        produto.nome +
-                        " - R$ " +
-                        produto.preco.toFixed(2) +
-                        "<br>";
+                    preco: preco,
 
-                    total += produto.preco;
+                    quantidade: 1
 
                 });
 
             }
 
-            document.getElementById("total").innerHTML =
-                "Total: R$ " + total.toFixed(2);
+
+            salvarCarrinho();
+
+            atualizarCarrinho();
+
+
+            alert(
+                `"${nome}" foi adicionado ao carrinho!`
+            );
 
         }
 
+
+        /*
+        ========================================
+        AUMENTAR QUANTIDADE
+        ========================================
+        */
+
+        function aumentarQuantidade(index) {
+
+            carrinho[index].quantidade++;
+
+            salvarCarrinho();
+
+            atualizarCarrinho();
+
+        }
+
+
+        /*
+        ========================================
+        DIMINUIR QUANTIDADE
+        ========================================
+        */
+
+        function diminuirQuantidade(index) {
+
+            if (
+                carrinho[index].quantidade > 1
+            ) {
+
+                carrinho[index].quantidade--;
+
+            } else {
+
+                carrinho.splice(index, 1);
+
+            }
+
+
+            salvarCarrinho();
+
+            atualizarCarrinho();
+
+        }
+
+
+        /*
+        ========================================
+        REMOVER PRODUTO
+        ========================================
+        */
+
+        function removerProduto(index) {
+
+            carrinho.splice(index, 1);
+
+            salvarCarrinho();
+
+            atualizarCarrinho();
+
+        }
+
+
+        /*
+        ========================================
+        ATUALIZAR CARRINHO
+        ========================================
+        */
+
+        function atualizarCarrinho() {
+
+            const lista =
+                document.getElementById(
+                    "listaCarrinho"
+                );
+
+            const totalElemento =
+                document.getElementById(
+                    "total"
+                );
+
+            const contador =
+                document.getElementById(
+                    "contador"
+                );
+
+
+            lista.innerHTML = "";
+
+
+            let total = 0;
+
+            let quantidadeTotal = 0;
+
+
+            if (carrinho.length === 0) {
+
+                lista.innerHTML = `
+                    <div class="carrinho-vazio">
+                        Seu carrinho está vazio.
+                    </div>
+                `;
+
+            }
+
+
+            carrinho.forEach(
+                (item, index) => {
+
+                    const subtotal =
+                        item.preco *
+                        item.quantidade;
+
+
+                    total += subtotal;
+
+                    quantidadeTotal +=
+                        item.quantidade;
+
+
+                    lista.innerHTML += `
+
+                        <div class="item-carrinho">
+
+                            <div class="item-info">
+
+                                <strong>
+                                    ${item.nome}
+                                </strong>
+
+                                <span>
+                                    ${formatarPreco(item.preco)}
+                                </span>
+
+                            </div>
+
+
+                            <div class="quantidade">
+
+                                <button
+                                    onclick="diminuirQuantidade(${index})"
+                                >
+                                    −
+                                </button>
+
+                                <strong>
+                                    ${item.quantidade}
+                                </strong>
+
+                                <button
+                                    onclick="aumentarQuantidade(${index})"
+                                >
+                                    +
+                                </button>
+
+                                <button
+                                    class="remover"
+                                    onclick="removerProduto(${index})"
+                                >
+                                    ✕
+                                </button>
+
+                            </div>
+
+
+                            <strong>
+                                ${formatarPreco(subtotal)}
+                            </strong>
+
+                        </div>
+
+                    `;
+
+                }
+            );
+
+
+            totalElemento.textContent =
+                formatarPreco(total);
+
+
+            contador.textContent =
+                quantidadeTotal;
+
+        }
+
+
+        /*
+        ========================================
+        FINALIZAR COMPRA
+        ========================================
+        */
 
         function finalizarCompra() {
 
             if (carrinho.length === 0) {
 
-                alert("Seu carrinho está vazio!");
+                alert(
+                    "Seu carrinho está vazio!"
+                );
 
                 return;
 
             }
 
-            let nome = prompt("Digite seu nome:");
 
-            if (nome) {
+            let total = 0;
 
-                alert(
-                    "Compra realizada com sucesso!\\n\\n" +
-                    "Cliente: " + nome
+
+            carrinho.forEach(item => {
+
+                total +=
+                    item.preco *
+                    item.quantidade;
+
+            });
+
+
+            const confirmacao =
+                confirm(
+                    "Deseja finalizar sua compra?\n\n" +
+                    "Total: " +
+                    formatarPreco(total)
                 );
 
+
+            if (confirmacao) {
+
+                alert(
+                    "Compra realizada com sucesso! 🎉\n\n" +
+                    "Obrigado por comprar na TechCell!"
+                );
+
+
                 carrinho = [];
+
+                salvarCarrinho();
 
                 atualizarCarrinho();
 
@@ -536,9 +2487,237 @@
 
         }
 
+
+        /*
+        ========================================
+        PESQUISA
+        ========================================
+        */
+
+        const pesquisa =
+            document.getElementById(
+                "pesquisa"
+            );
+
+
+        const categoria =
+            document.getElementById(
+                "categoria"
+            );
+
+
+        function filtrarProdutos() {
+
+            const texto =
+                pesquisa.value
+                    .toLowerCase()
+                    .trim();
+
+
+            const categoriaSelecionada =
+                categoria.value;
+
+
+            const produtos =
+                document.querySelectorAll(
+                    ".produto"
+                );
+
+
+            let encontrados = 0;
+
+
+            produtos.forEach(produto => {
+
+                const nome =
+                    produto
+                        .dataset
+                        .nome
+                        .toLowerCase();
+
+
+                const categoriaProduto =
+                    produto
+                        .dataset
+                        .categoria;
+
+
+                const descricao =
+                    produto
+                        .querySelector(
+                            ".descricao"
+                        )
+                        .textContent
+                        .toLowerCase();
+
+
+                const correspondePesquisa =
+                    nome.includes(texto) ||
+                    descricao.includes(texto);
+
+
+                const correspondeCategoria =
+                    categoriaSelecionada ===
+                        "todos" ||
+                    categoriaProduto ===
+                        categoriaSelecionada;
+
+
+                if (
+                    correspondePesquisa &&
+                    correspondeCategoria
+                ) {
+
+                    produto.style.display =
+                        "block";
+
+                    encontrados++;
+
+                } else {
+
+                    produto.style.display =
+                        "none";
+
+                }
+
+            });
+
+
+            let mensagem =
+                document.querySelector(
+                    ".sem-resultados"
+                );
+
+
+            if (encontrados === 0) {
+
+                if (!mensagem) {
+
+                    mensagem =
+                        document.createElement(
+                            "div"
+                        );
+
+                    mensagem.className =
+                        "sem-resultados";
+
+                    mensagem.textContent =
+                        "😕 Nenhum produto encontrado.";
+
+                    document
+                        .getElementById(
+                            "listaProdutos"
+                        )
+                        .appendChild(mensagem);
+
+                }
+
+            } else {
+
+                if (mensagem) {
+
+                    mensagem.remove();
+
+                }
+
+            }
+
+        }
+
+
+        pesquisa.addEventListener(
+            "input",
+            filtrarProdutos
+        );
+
+
+        categoria.addEventListener(
+            "change",
+            filtrarProdutos
+        );
+
+
+        /*
+        ========================================
+        INICIALIZAR
+        ========================================
+        */
+
+        atualizarCarrinho();
+
+
+        
+
+const canvas = document.getElementById("snow");
+const ctx = canvas.getContext("2d");
+
+let flocos = [];
+
+function ajustarCanvas() {
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+}
+
+window.addEventListener(
+    "resize",
+    ajustarCanvas
+);
+
+ajustarCanvas();
+
+
+function criarFlocos() {
+
+    flocos = [];
+
+    const quantidade =
+        Math.min(
+            Math.floor(window.innerWidth / 7),
+            180
+        );
+
+    for (
+        let i = 0;
+        i < quantidade;
+        i++
+    ) {
+
+        flocos.push({
+
+            x:
+                Math.random() *
+                canvas.width,
+
+            y:
+                Math.random() *
+                canvas.height,
+
+            tamanho:
+                Math.random() * 4 + 1,
+
+            velocidade:
+                Math.random() * 2 + 1,
+
+            vento:
+                Math.random() * 1.5 - 0.75,
+
+            opacidade:
+                Math.random() * 0.7 + 0.3
+
+        });
+
+    }
+
+}
+
+criarFlocos();
+
+
     </script>
+    
 
 </body>
 
 </html>
-```
